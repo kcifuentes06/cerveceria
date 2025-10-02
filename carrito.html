@@ -1,0 +1,43 @@
+<header>
+    <h1>Tu Carrito de Compras</h1>
+</header>
+
+<main>
+    <div id="cart-container">
+        <div id="empty-cart-message" style="display: none;">
+            <p>Tu carrito está vacío. ¡Es hora de llenarlo con la mejor cerveza!</p>
+            <a href="catalogo.html" class="btn-return">
+                <button>Volver a la tienda</button>
+            </a>
+        </div>
+
+        <ul id="cart-items">
+            <li class="cart-item">
+                <img src="cerveza_lager.png" alt="Cerveza Lager">
+                <div class="item-details">
+                    <h3>Cerveza Lager</h3>
+                    <p>Precio: $5.500 CLP</p>
+
+                    <div class="quantity-control">
+                        <button class="decrease-btn">-</button>
+                        <span class="item-quantity">1</span>
+                        <button class="increase-btn">+</button>
+                    </div>
+
+                </div>
+                <button class="remove-item">Eliminar</button>
+            </li>
+        </ul>
+    
+    <div id="cart-summary">
+        <p>Total a pagar: <span id="cart-total">$0 CLP</span></p>
+    </div>
+    </div>
+
+    <div class="cart-actions">
+        <a href="catalogo.html" class="btn-return">
+            <button>Volver a la tienda</button>
+        </a>
+        <button id="checkout-btn" class="btn-checkout">Continuar al pago</button>
+    </div>
+</main>

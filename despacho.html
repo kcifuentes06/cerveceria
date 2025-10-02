@@ -1,0 +1,55 @@
+<section class="despacho-container">
+    <h2>Datos de Despacho</h2>
+
+    <div class="direccion-selector">
+        <label for="direcciones-guardadas">Selecciona una dirección guardada:</label>
+        <select id="direcciones-guardadas" name="direcciones-guardadas">
+            <option value="">Selecciona una dirección...</option>
+            <option value="1">Casa (Ej. Los Lirios 123, La Pintana)</option>
+        </select>
+    </div>
+
+    <div id="direccion-detalle" style="display: none;">
+        <h3>Detalles de la dirección</h3>
+        <div class="detalle-campos">
+            <p><strong>Nombre:</strong> <span id="detalle-nombre"></span></p>
+            <p><strong>RUT:</strong> <span id="detalle-rut"></span></p>
+            <p><strong>Dirección:</strong> <span id="detalle-direccion"></span></p>
+            <p><strong>Número:</strong> <span id="detalle-numero"></span></p>
+            <p><strong>Comuna:</strong> <span id="detalle-comuna"></span></p>
+            <p><strong>Región:</strong> <span id="detalle-region"></span></p>
+            <p><strong>Correo:</strong> <span id="detalle-correo"></span></p>
+        </div>
+        <button id="actualizar-direccion-btn" class="btn-actualizar">Actualizar Dirección</button>
+    </div>
+</section>
+
+
+<button id="mostrar-form-agregar" class="btn-agregar">Agregar Nueva Dirección</button>
+
+<form id="form-direccion" style="display: none;">
+    <h3>Ingresa tu nueva dirección</h3>
+    
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="rut">RUT:</label>
+    <input type="text" id="rut" name="rut" required>
+
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" name="correo" required>
+
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" name="direccion" required>
+
+    <label for="numero">Número:</label>
+    <input type="number" id="numero" name="numero" required>
+
+    <label for="comuna">Comuna:</label>
+    <input type="text" id="comuna" name="comuna" required>
+
+    <label for="region">Región:</label>
+    <input type="text" id="region" name="region" required>
+
+    <button type="submit" id="guardar-direccion-btn" class="btn-guardar">Guardar Dirección</button>
+    </form>
