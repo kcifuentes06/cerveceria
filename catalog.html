@@ -142,32 +142,25 @@
 
 ```
 <!-- CATALOGO -->
-<section class="catalogo-productos">
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="icono">🍺</div>
-                <div class="card-body">
-                    <h5 class="card-title">Cerveza Lager</h5>
-                    <p class="card-text">Una cerveza ligera y refrescante, ideal para el verano.</p>
-                    <span class="fw-bold">$5.500 CLP</span><br>
-                    <button class="btn btn-success mt-2">Agregar al carrito</button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card text-center">
-                <div class="icono">🍺</div>
-                <div class="card-body">
-                    <h5 class="card-title">Cerveza IPA</h5>
-                    <p class="card-text">Con un sabor intenso, amargor marcado y aromas a lúpulo.</p>
-                    <span class="fw-bold">$6.200 CLP</span><br>
-                    <button class="btn btn-success mt-2">Agregar al carrito</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="catalogo-productos"> 
+    <ul class="list-group"> 
+        <li class="list-group-item d-flex justify-content-between align-items-center"> 
+            <div> 
+                <h5>🍺 Cerveza Lager</h5> 
+                <p class="mb-1">Una cerveza ligera y refrescante, ideal para el verano.</p> 
+                <span class="precio">$5.500 CLP</span> 
+            </div> 
+            <button class="btn btn-success">Agregar al carrito</button> 
+        </li> 
+        <li class="list-group-item d-flex justify-content-between align-items-center"> 
+            <div> 
+                <h5>🍺 Cerveza IPA</h5> 
+                <p class="mb-1">Con un sabor intenso, amargor marcado y aromas a lúpulo.</p> 
+                <span class="precio">$6.200 CLP</span> 
+            </div> 
+            <button class="btn btn-success">Agregar al carrito</button> 
+        </li> 
+    </ul> 
 </section>
 
 <!-- PAGINACION -->
