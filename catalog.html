@@ -1,81 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="es">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Cervecería Artesanal - Catálogo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #5a3825 40%, #3e2417 100%);
+            font-family: 'Georgia', serif;
+            background-attachment: fixed;
+        }
+        /* Navbar estilo madera */
+        .navbar {
+            background-color: rgba(90, 56, 37, 0.95);
+        }
+        .navbar-brand, .nav-link {
+            color: #f8e2c9 !important;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color: #ffd27f !important;
+        }
+        /* Header */
+        header {
+            background: rgba(0,0,0,0.6);
+            padding: 2rem;
+            color: #fdf6e3;
+            text-align: center;
+            border-bottom: 4px solid #a05a2c;
+        }
+        header h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+        /* Contenedor con efecto fondo translúcido */
+        .contenedor-translucido {
+            background: rgba(255, 247, 236, 0.9);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        /* Inputs y botones */
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #c49a6c;
+        }
+        .btn-primary {
+            background-color: #a05a2c;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #7a431f;
+        }
+        /* Cards de productos */
+        .card {
+            border: none;
+            background-color: #fff7ec;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+        }
+        .card-title {
+            color: #5a3825;
+            font-weight: bold;
+        }
+        .btn-success {
+            background-color: #d4a017;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #b8860b;
+        }
+        /* Paginación */
+        .pagination .page-link {
+            color: #5a3825;
+            border: none;
+            font-weight: bold;
+        }
+        .pagination .page-link:hover {
+            background-color: #f4d19d;
+            color: #5a3825;
+        }
+        /* Iconos simulados */
+        .icono {
+            font-size: 2rem;
+            color: #d4a017;
+        }
+    </style>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm bg-light">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Catalogo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Mi Cuenta</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link 3</a>
-      </li>
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      🍺 Cervecería Artesanal
+    </a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="#">Catálogo</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Mi Cuenta</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
     </ul>
   </div>
 </nav>
 
+<!-- HEADER -->
+
 <header>
-    <nav>
-        <a href="index.html" class="logo">
-            <img src="logo_cerveceria.png" alt="Logo de la Cervecería">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1>Bienvenido a la Cervecería Artesanal</h1>
+        <a href="carrito.html" class="btn btn-warning">
+            🛒 Carrito
         </a>
-        <a href="carrito.html" class="cart">
-            <img src="carrito_icon.png" alt="Carrito de Compras">
-        </a>
-    </nav>
+    </div>
 </header>
 
-<div class="herramientas-catalogo">
+<!-- CONTENIDO CON FONDO TRANSLÚCIDO -->
 
-    <div class="search-container">
-        <label for="search-bar">Buscar:</label>
-        <input type="text" id="search-bar" placeholder="Busca tu cerveza...">
+<div class="container contenedor-translucido">
+    <!-- BUSCADOR Y FILTROS -->
+    <div class="row g-3 align-items-center mb-4">
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="search-bar" placeholder="Busca tu cerveza artesanal...">
+        </div>
+        <div class="col-md-4">
+            <select id="filtro-cervezas" class="form-select">
+                <option value="todas">Todas</option>
+                <option value="lager">Lager</option>
+                <option value="ale">Ale</option>
+                <option value="stout">Stout</option>
+                <option value="ipa">IPA</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Buscar</button>
+        </div>
     </div>
 
-    <div class="filter-container">
-        <label for="filtro-cervezas">Filtrar por tipo:</label>
-        <select id="filtro-cervezas" name="filtro-cervezas">
-            <option value="todas">Todas</option>
-            <option value="lager">Lager</option>
-            <option value="ale">Ale</option>
-            <option value="stout">Stout</option>
-            <option value="ipa">IPA</option>
-        </select>
-    </div>
-
-</div>
-
+```
+<!-- CATALOGO -->
 <section class="catalogo-productos">
-    <ul id="lista-cervezas">
-        <li class="cerveza-item">
-            <img src="cerveza_lager.png" alt="Cerveza Lager">
-            <h3>Nombre de la Cerveza Lager</h3>
-            <p>Una cerveza ligera y refrescante.</p>
-            <span>$5.500 CLP</span>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </li>
-        <li class="cerveza-item">
-            <img src="cerveza_ipa.png" alt="Cerveza IPA">
-            <h3>Nombre de la Cerveza IPA</h3>
-            <p>Con un sabor amargo y aromas a lúpulo.</p>
-            <span>$6.200 CLP</span>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </li>
-        </ul>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="icono">🍺</div>
+                <div class="card-body">
+                    <h5 class="card-title">Cerveza Lager</h5>
+                    <p class="card-text">Una cerveza ligera y refrescante, ideal para el verano.</p>
+                    <span class="fw-bold">$5.500 CLP</span><br>
+                    <button class="btn btn-success mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="icono">🍺</div>
+                <div class="card-body">
+                    <h5 class="card-title">Cerveza IPA</h5>
+                    <p class="card-text">Con un sabor intenso, amargor marcado y aromas a lúpulo.</p>
+                    <span class="fw-bold">$6.200 CLP</span><br>
+                    <button class="btn btn-success mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<div class="paginacion">
-    <button id="anterior">Anterior</button>
-    <button id="siguiente">Siguiente</button>
+<!-- PAGINACION -->
+<div class="my-5">
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+      </ul>
+    </nav>
 </div>
+```
+
+</div>
+
+</body>
+</html>
