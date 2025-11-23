@@ -21,7 +21,7 @@
       font-weight: bold;
     }
     .nav-link:hover {
-      color: #ffd27f !important;
+      color: #ffd2f7 !important;
     }
     header {
       text-align: center;
@@ -82,7 +82,7 @@
       padding: 0.3rem 0.7rem;
       border-radius: 5px;
       font-weight: bold;
-      cursor: pointer; /* Añadido cursor */
+      cursor: pointer;
     }
     .remove-item {
       background-color: #d84315;
@@ -91,7 +91,7 @@
       padding: 0.5rem 0.8rem;
       border-radius: 5px;
       font-size: 0.9rem;
-      cursor: pointer; /* Añadido cursor */
+      cursor: pointer;
     }
     #cart-summary {
       margin-top: 1.5rem;
@@ -107,7 +107,7 @@
       justify-content: space-between;
       margin-top: 2rem;
     }
-    .btn-return button,
+    .btn-return-to-store,
     .btn-checkout {
       background-color: #6d4c41;
       color: #fff;
@@ -116,9 +116,9 @@
       border-radius: 8px;
       font-weight: bold;
       transition: background 0.3s ease;
-      cursor: pointer; /* Añadido cursor */
+      cursor: pointer;
     }
-    .btn-return button:hover,
+    .btn-return-to-store:hover,
     .btn-checkout:hover {
       background-color: #8d6e63;
     }
@@ -148,9 +148,7 @@
   <div id="cart-container">
     <div id="empty-cart-message" style="display: none;">
       <p>Tu carrito está vacío. ¡Es hora de llenarlo con la mejor cerveza!</p>
-      <a href="catalog.html" class="btn-return">
-        <button>Volver a la tienda</button>
-      </a>
+      <button id="return-to-store-btn" class="btn-return-to-store">Volver a la tienda</button>
     </div>
 
     <ul id="cart-items">
@@ -162,13 +160,19 @@
   </div>
 
   <div class="cart-actions">
-    <a href="catalog.html" class="btn-return">
-      <button>Volver a la tienda</button>
-    </a>
+    <button id="return-to-store-btn-bottom" class="btn-return-to-store">Volver a la tienda</button>
+    
     <button id="checkout-btn" class="btn-checkout">Continuar al pago</button>
   </div>
 </main>
 
+<script>
+
+    document.getElementById('return-to-store-btn-bottom').addEventListener('click', () => {
+        window.location.href = 'catalog.html';
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/carrito.js"></script>
 
 </body>

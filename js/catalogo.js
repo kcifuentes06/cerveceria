@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
-    // Asumiendo que la función filtrarProductos está implementada en este archivo
+    
+    document.getElementById('filtro-tipo').addEventListener('change', cargarProductos);
+    document.getElementById('filtro-cervezas').addEventListener('change', cargarProductos);
+    
 });
 
 function getToken() {
@@ -9,12 +12,25 @@ function getToken() {
 
 async function cargarProductos() {
     const catalogoElement = document.getElementById('catalogo');
-    catalogoElement.innerHTML = ''; 
+    catalogoElement.innerHTML = ' <li class="list-group-item text-center">Cargando productos...</li>'; 
+
+    const filtroTipo = document.getElementById('filtro-tipo').value;
+    const filtroVariedad = document.getElementById('filtro-cervezas').value;
     
-    // Aquí puedes incluir la lógica de filtros y búsqueda si la implementas en el backend
+    let url = '/api/productos?';
+    if (filtroTipo !== 'todos') url += `tipo=${filtroTipo}&`;
+    if (filtroVariedad !== 'todas') url += `variedad=${filtroVariedad}&`;
+
     try {
-        const response = await fetch('/api/productos'); 
+        const response = await fetch(url); 
         const productos = await response.json();
+
+        catalogoElement.innerHTML = ''; 
+
+        if (productos.length === 0) {
+            catalogoElement.innerHTML = '<li class="list-group-item text-center">No se encontraron productos con esos filtros.</li>';
+            return;
+        }
 
         productos.forEach(producto => {
             const li = document.createElement('li');
@@ -46,7 +62,7 @@ async function cargarProductos() {
 
     } catch (error) {
         console.error('Error al cargar productos:', error);
-        catalogoElement.innerHTML = '<p class="text-danger">No se pudieron cargar los productos.</p>';
+        catalogoElement.innerHTML = '<li class="list-group-item text-center text-danger">No se pudieron cargar los productos.</li>';
     }
 }
 
@@ -54,7 +70,7 @@ async function agregarAlCarrito(producto_id, nombre_producto, precio) {
     const token = getToken();
     if (!token) {
         alert('Debes iniciar sesión para agregar productos al carrito.');
-        window.location.href = 'login.html';
+        window.location.href = 'login.html'; 
         return;
     }
     

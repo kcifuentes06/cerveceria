@@ -78,7 +78,6 @@ async function cargarDirecciones() {
             mostrarDetalleDireccion(direccionesGuardadas[0]._id);
             mostrarFormularioAgregar(false);
         } else {
-            
             mostrarFormularioAgregar(true);
             document.getElementById('select-direccion-container').style.display = 'none';
             document.getElementById('mostrar-form-agregar').style.display = 'none';
@@ -187,7 +186,6 @@ async function finalizarCheckout() {
 
         if (response.ok) {
             alert(`¡Pedido # ${data.pedido_id.substring(18)} creado con éxito! Total: $${data.total.toLocaleString('es-CL')}. Redirigiendo a la pasarela de pago.`);
-            
             window.location.href = `resumen_pago.html?pedido=${data.pedido_id}`; 
         } else {
             alert(data.message || 'Error al finalizar el checkout. Hubo un problema con tu carrito o stock.');

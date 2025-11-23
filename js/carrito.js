@@ -1,13 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     cargarCarrito();
-    
-    document.getElementById('checkout-btn').addEventListener('click', () => {
-        window.location.href = 'despacho.html';
+    document.getElementById('checkout-btn').addEventListener('click', handleCheckoutRedirect);
+    document.getElementById('return-to-store-btn').addEventListener('click', () => {
+        window.location.href = 'catalog.html';
     });
 });
 
 function getToken() {
     return localStorage.getItem('userToken');
+}
+
+function handleCheckoutRedirect() {
+    const token = getToken();
+    if (!token) {
+        alert('Debes iniciar sesión para continuar al pago.');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    window.location.href = 'despacho.html';
 }
 
 async function cargarCarrito() {
@@ -66,7 +77,6 @@ async function cargarCarrito() {
         
         totalElement.textContent = `$${total.toLocaleString('es-CL')} CLP`;
         
-        
         cartItemsElement.querySelectorAll('.increase-btn').forEach(btn => btn.addEventListener('click', (e) => actualizarCantidad(e.target.dataset.id, parseInt(e.target.dataset.cantidad) + 1)));
         cartItemsElement.querySelectorAll('.decrease-btn').forEach(btn => btn.addEventListener('click', (e) => actualizarCantidad(e.target.dataset.id, parseInt(e.target.dataset.cantidad) - 1)));
         cartItemsElement.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => eliminarItem(e.target.dataset.id)));
@@ -81,7 +91,6 @@ async function actualizarCantidad(itemId, nuevaCantidad) {
     const token = getToken();
 
     if (nuevaCantidad < 1) {
-        
         if (confirm('¿Deseas eliminar este producto del carrito?')) {
             eliminarItem(itemId);
         }
