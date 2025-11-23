@@ -78,21 +78,19 @@
 
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="#">
+    <a class="navbar-brand d-flex align-items-center" href="catalog.html">
       🍺 Craft & Beer
     </a>
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" href="#">Catálogo</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Mi Cuenta</a></li>
+      <li class="nav-item"><a class="nav-link" href="catalog.html">Catálogo</a></li>
+      <li class="nav-item"><a class="nav-link" href="login.html">Mi Cuenta</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- HEADER -->
 <header>
   <div class="container d-flex justify-content-between align-items-center">
     <h1>Bienvenido a Craft & Beer</h1>
@@ -100,9 +98,7 @@
   </div>
 </header>
 
-<!-- CONTENIDO PRINCIPAL -->
 <div class="container contenedor-translucido">
-  <!-- BUSCADOR Y FILTROS -->
   <div class="row g-3 align-items-center mb-4">
     <div class="col-md-4">
       <input type="text" class="form-control" id="search-bar" placeholder="Busca tu producto artesanal...">
@@ -124,86 +120,14 @@
       </select>
     </div>
     <div class="col-md-1">
-      <button class="btn btn-primary w-100" onclick="filtrarProductos()">Buscar</button>
+      <button class="btn btn-primary w-100" onclick="cargarProductos()">Buscar</button>
     </div>
   </div>
 
 
   <section class="catalogo-productos">
     <ul class="list-group" id="catalogo">
-
-      <li class="list-group-item d-flex justify-content-between align-items-center producto cerveza lager">
-        <div class="d-flex align-items-center">
-          <img src="img/lager.webp" class="product-img me-3" alt="Cerveza Lager">
-          <div>
-            <h5>🍺 Cerveza Lager</h5>
-            <p class="mb-1">Una cerveza ligera y refrescante, ideal para el verano.</p>
-            <span class="precio">$5.500 CLP</span>
-          </div>
-        </div>
-        <button class="btn btn-success">Agregar al carrito</button>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center producto cerveza ipa">
-        <div class="d-flex align-items-center">
-          <img src="img/ipa.webp" class="product-img me-3" alt="Cerveza IPA">
-          <div>
-            <h5>🍺 Cerveza IPA</h5>
-            <p class="mb-1">Con un sabor intenso, amargor marcado y aromas a lúpulo.</p>
-            <span class="precio">$6.200 CLP</span>
-          </div>
-        </div>
-        <button class="btn btn-success">Agregar al carrito</button>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center producto cerveza stout">
-        <div class="d-flex align-items-center">
-          <img src="img/stout.webp" class="product-img me-3" alt="Cerveza Stout">
-          <div>
-            <h5>🍺 Cerveza Stout</h5>
-            <p class="mb-1">Cuerpo robusto con notas de café y chocolate.</p>
-            <span class="precio">$6.000 CLP</span>
-          </div>
-        </div>
-        <button class="btn btn-success">Agregar al carrito</button>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center producto cerveza ale">
-        <div class="d-flex align-items-center">
-          <img src="img/ale.webp" class="product-img me-3" alt="Cerveza Ale">
-          <div>
-            <h5>🍺 Cerveza Ale</h5>
-            <p class="mb-1">De sabor afrutado y espuma cremosa, una experiencia clásica.</p>
-            <span class="precio">$5.800 CLP</span>
-          </div>
-        </div>
-        <button class="btn btn-success">Agregar al carrito</button>
-      </li>
-
-
-      <li class="list-group-item d-flex justify-content-between align-items-center producto growler">
-        <div class="d-flex align-items-center">
-          <img src="img/growler1.webp" class="product-img me-3" alt="Growler 1L">
-          <div>
-            <h5>🍶 Growler 1L</h5>
-            <p class="mb-1">Botella reutilizable para mantener tu cerveza fresca.</p>
-            <span class="precio">$8.000 CLP</span>
-          </div>
-        </div>
-        <button class="btn btn-success">Agregar al carrito</button>
-      </li>
-
-      <li class="list-group-item d-flex justify-content-between align-items-center producto growler">
-        <div class="d-flex align-items-center">
-          <img src="img/growler2.webp" class="product-img me-3" alt="Growler 2L">
-          <div>
-            <h5>🍶 Growler 2L</h5>
-            <p class="mb-1">Ideal para compartir, conserva la frescura de la cerveza.</p>
-            <span class="precio">$12.000 CLP</span>
-          </div>
-        </div>
-        <button class="btn btn-success">Agregar al carrito</button>
-      </li>
+        <li class="list-group-item text-center">Cargando productos...</li>
     </ul>
   </section>
 
@@ -220,6 +144,8 @@
     </nav>
   </div>
 </div>
+
+<script src="js/catalogo.js"></script>
 
 </body>
 </html>

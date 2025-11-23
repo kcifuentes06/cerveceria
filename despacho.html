@@ -24,7 +24,7 @@
       font-weight: bold;
     }
     .nav-link:hover {
-      color: #ffd27f !important;
+      color: #ffd2f7 !important;
     }
     .despacho-container {
       max-width: 800px;
@@ -67,7 +67,8 @@
     }
     .btn-agregar,
     .btn-actualizar,
-    .btn-guardar {
+    .btn-guardar,
+    .btn-checkout { /* Estilo del botón de checkout */
       background-color: #6d4c41;
       color: #fff;
       border: none;
@@ -76,10 +77,12 @@
       font-weight: bold;
       margin-top: 1rem;
       transition: background 0.3s ease;
+      cursor: pointer;
     }
     .btn-agregar:hover,
     .btn-actualizar:hover,
-    .btn-guardar:hover {
+    .btn-guardar:hover,
+    .btn-checkout:hover {
       background-color: #8d6e63;
     }
     form {
@@ -89,6 +92,14 @@
       box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
       margin-top: 1.5rem;
     }
+    .btn-checkout {
+        background-color: #d4a017;
+        color: #3e2723;
+        font-size: 1.2rem;
+    }
+    .btn-checkout:hover {
+        background-color: #b8860b;
+    }
   </style>
 </head>
 <body>
@@ -96,12 +107,12 @@
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="#">
+    <a class="navbar-brand d-flex align-items-center" href="catalog.html">
       🍺 Craft & Beer
     </a>
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" href="#">Catálogo</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Mi Cuenta</a></li>
+      <li class="nav-item"><a class="nav-link" href="catalog.html">Catálogo</a></li>
+      <li class="nav-item"><a class="nav-link" href="login.html">Mi Cuenta</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
     </ul>
   </div>
@@ -110,18 +121,16 @@
 <section class="despacho-container">
   <h2>Datos de Despacho</h2>
 
-  <div class="direccion-selector">
-    <label for="direcciones-guardadas">Selecciona una dirección guardada:</label>
-    <select id="direcciones-guardadas" name="direcciones-guardadas">
+  <div class="direccion-selector" id="select-direccion-container">
+    <label for="select-direccion">Selecciona una dirección guardada:</label>
+    <select id="select-direccion" name="select-direccion">
       <option value="">Selecciona una dirección...</option>
-      <option value="1">Casa (Ej. Los Lirios 123, La Pintana)</option>
-    </select>
+      </select>
   </div>
 
-  <div id="direccion-detalle" style="display: none;">
-    <h3>Detalles de la dirección</h3>
+  <div id="detalle-direccion-actual" style="display: none;">
+    <h3>Detalles de la dirección <span id="detalle-etiqueta"></span></h3>
     <div class="detalle-campos">
-      <p><strong>Nombre:</strong> <span id="detalle-nombre"></span></p>
       <p><strong>RUT:</strong> <span id="detalle-rut"></span></p>
       <p><strong>Dirección:</strong> <span id="detalle-direccion"></span></p>
       <p><strong>Número:</strong> <span id="detalle-numero"></span></p>
@@ -137,11 +146,13 @@
   <button id="mostrar-form-agregar" class="btn-agregar">Agregar Nueva Dirección</button>
 </div>
 
-<form id="form-direccion" style="display: none;">
+<form id="form-direccion" style="display: none;" class="despacho-container">
   <h3>Ingresa tu nueva dirección</h3>
 
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" name="nombre" required>
+  <input type="hidden" id="direccion-id" name="direccion-id"> 
+
+  <label for="etiqueta">Etiqueta (Ej: Casa, Trabajo):</label>
+  <input type="text" id="etiqueta" name="etiqueta" required>
 
   <label for="rut">RUT:</label>
   <input type="text" id="rut" name="rut" required>
@@ -149,7 +160,7 @@
   <label for="correo">Correo:</label>
   <input type="email" id="correo" name="correo" required>
 
-  <label for="direccion">Dirección:</label>
+  <label for="direccion">Calle:</label>
   <input type="text" id="direccion" name="direccion" required>
 
   <label for="numero">Número:</label>
@@ -164,6 +175,13 @@
   <button type="submit" id="guardar-direccion-btn" class="btn-guardar">Guardar Dirección</button>
 </form>
 
+<section class="despacho-container text-center my-4">
+    <h2>Resumen y Pago</h2>
+    <p class="h4">Total a pagar: <span id="total-a-pagar">$XX.XXX CLP</span></p> 
+    <button id="confirmar-checkout-btn" class="btn-checkout w-100">CONFIRMAR PEDIDO Y CONTINUAR AL PAGO</button>
+</section>
+
+<script src="js/despacho.js"></script>
+
 </body>
 </html>
-
