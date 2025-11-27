@@ -1,14 +1,11 @@
-// En public/js/despacho.js
-
-// Almacén local para las direcciones cargadas
 let direccionesGuardadas = []; 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Inicialización de datos
+    
     cargarDirecciones();
     cargarTotalPedido();
 
-    // 2. Event Listeners para formularios y acciones
+    
     const formDireccion = document.getElementById('form-direccion');
     if (formDireccion) {
         formDireccion.addEventListener('submit', manejarFormularioDireccion);
@@ -21,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Helper para obtener el token JWT
+
 function getToken() {
     return localStorage.getItem('userToken');
 }
 
-// Helper para establecer texto de forma segura
+
 const setTextContentSafely = (id, text) => {
     const el = document.getElementById(id);
     if (el) {
@@ -34,9 +31,6 @@ const setTextContentSafely = (id, text) => {
     }
 };
 
-// =========================================================
-// 1. LÓGICA DE CARGA DE DATOS (TOTAL Y DIRECCIONES)
-// =========================================================
 
 async function cargarTotalPedido() {
     const token = getToken();
@@ -47,7 +41,7 @@ async function cargarTotalPedido() {
     }
 
     try {
-        // Llama a GET /api/carrito para obtener el total calculado
+        
         const response = await fetch('/api/carrito', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -60,7 +54,7 @@ async function cargarTotalPedido() {
         const data = await response.json();
         const total = data.total; 
 
-        // Formato a moneda chilena (CLP)
+        
         setTextContentSafely('total-a-pagar', total.toLocaleString('es-CL') + ' CLP');
         
     } catch (error) {
@@ -80,14 +74,14 @@ async function cargarDirecciones() {
     }
 
     try {
-        // Llama a GET /api/direcciones (Ruta corregida)
+        
         const response = await fetch('/api/direcciones', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (!response.ok) {
             if (response.status === 401 || response.status === 403) {
-                // Si el token falló, forzamos el re-login
+                
                 localStorage.removeItem('userToken');
                 alert('Sesión expirada. Por favor, inicia sesión de nuevo.');
                 window.location.href = 'login.html';
@@ -107,18 +101,18 @@ async function cargarDirecciones() {
                 selectElement.appendChild(option);
             });
             
-            // Seleccionar y mostrar la primera dirección por defecto
+            
             selectElement.value = direccionesGuardadas[0]._id;
             seleccionarDireccion(direccionesGuardadas[0]);
 
-            // Asegurar que el formulario esté oculto y los selectores visibles
+            
             document.getElementById('form-direccion').style.display = 'none';
             document.getElementById('select-direccion-container').style.display = 'block';
             document.getElementById('mostrar-form-agregar').style.display = 'block';
 
         } else {
-            // Si no hay direcciones, forzar la vista de agregar
-            mostrarFormularioAgregar(true); // True para forzar la visibilidad del form
+            
+            mostrarFormularioAgregar(true);
             document.getElementById('select-direccion-container').style.display = 'none';
         }
 
@@ -128,9 +122,6 @@ async function cargarDirecciones() {
     }
 }
 
-// =========================================================
-// 2. LÓGICA DE FORMULARIO Y VISIBILIDAD
-// =========================================================
 
 function seleccionarDireccionDesdeDropdown(e) {
     const direccionId = e.target.value;
@@ -152,10 +143,10 @@ function llenarFormularioParaActualizar() {
     
     const dir = direccionesGuardadas.find(d => d._id === direccionId);
     
-    // Llenar formulario con datos del objeto
-    document.getElementById('direccion-id').value = dir._id; // ID oculto para actualización
+    
+    document.getElementById('direccion-id').value = dir._id;
     document.getElementById('etiqueta').value = dir.etiqueta;
-    document.getElementById('nombre_receptor').value = dir.nombre_receptor; // <-- Campo Nuevo
+    document.getElementById('nombre_receptor').value = dir.nombre_receptor;
     document.getElementById('rut').value = dir.rut_receptor;
     document.getElementById('correo').value = dir.correo_receptor;
     document.getElementById('direccion').value = dir.calle;
@@ -163,12 +154,12 @@ function llenarFormularioParaActualizar() {
     document.getElementById('comuna').value = dir.comuna;
     document.getElementById('region').value = dir.region;
 
-    mostrarFormularioAgregar(true); // Mostrar el formulario para edición
+    mostrarFormularioAgregar(true);
 }
 
 function mostrarFormularioAgregar(isInitialLoad = false) {
     if (!isInitialLoad) {
-        document.getElementById('product-form').reset(); // Limpiar si es nuevo
+        document.getElementById('product-form').reset();
         document.getElementById('direccion-id').value = '';
     }
     document.getElementById('form-direccion').style.display = 'block';
@@ -178,7 +169,7 @@ function mostrarFormularioAgregar(isInitialLoad = false) {
 
 
 function seleccionarDireccion(direccion) {
-    // Mostrar detalles en la tarjeta de resumen (usa el utilitario seguro)
+    
     setTextContentSafely('detalle-etiqueta', direccion.etiqueta);
     setTextContentSafely('detalle-nombre', direccion.nombre_receptor);
     setTextContentSafely('detalle-rut', direccion.rut_receptor);
@@ -188,27 +179,21 @@ function seleccionarDireccion(direccion) {
     setTextContentSafely('detalle-comuna', direccion.comuna);
     setTextContentSafely('detalle-region', direccion.region);
 
-    // Guardar el ID de la dirección seleccionada para el checkout
+    
     localStorage.setItem('direccionSeleccionadaId', direccion._id);
     const card = document.getElementById('detalle-direccion-actual');
     if (card) card.style.display = 'block';
 }
-
-
-// =========================================================
-// 3. API: GUARDAR DIRECCIÓN Y PAGAR
-// =========================================================
 
 async function manejarFormularioDireccion(e) {
     e.preventDefault();
     const token = getToken();
     const form = e.target;
     const direccionId = document.getElementById('direccion-id').value;
-    
-    // Recolección de datos del formulario, incluyendo el nuevo campo nombre_receptor
+
     const data = {
         etiqueta: form.etiqueta.value,
-        nombre_receptor: document.getElementById('nombre_receptor').value, // Lectura del nuevo campo
+        nombre_receptor: document.getElementById('nombre_receptor').value,
         rut_receptor: form.rut.value,
         correo_receptor: form.correo.value,
         calle: form.direccion.value,
@@ -238,7 +223,7 @@ async function manejarFormularioDireccion(e) {
             form.reset();
             document.getElementById('direccion-id').value = '';
             form.style.display = 'none';
-            cargarDirecciones(); // Recargar lista y seleccionar la nueva/actualizada
+            cargarDirecciones();
         } else {
             alert(`Error al guardar dirección: ${result.message}`);
         }
@@ -260,7 +245,7 @@ async function iniciarProcesoPago() {
     }
 
     try {
-        // Llama a POST /api/pedidos/checkout
+        
         const response = await fetch('/api/pedidos/checkout', {
             method: 'POST',
             headers: {
@@ -274,7 +259,7 @@ async function iniciarProcesoPago() {
 
         if (response.ok) {
             alert(data.message);
-            // Redirigir al punto de inicio de Mercado Pago
+            
             window.location.href = data.init_point; 
         } else {
             alert(data.message || 'Error al procesar el pago. Verifica el stock y la dirección.');

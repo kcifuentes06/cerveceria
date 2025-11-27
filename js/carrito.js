@@ -1,12 +1,8 @@
-// En public/js/carrito.js
-
 document.addEventListener('DOMContentLoaded', () => {
     cargarCarrito();
     
-    // El botón de checkout redirige a despacho.html (Opción B)
     document.getElementById('checkout-btn').addEventListener('click', handleCheckoutRedirect);
     
-    // Listener para los botones "Volver a la tienda"
     document.querySelectorAll('.btn-return-to-store').forEach(btn => {
         btn.addEventListener('click', () => {
             window.location.href = 'catalog.html';
@@ -18,7 +14,7 @@ function getToken() {
     return localStorage.getItem('userToken');
 }
 
-// Función que se encarga de la redirección al checkout
+
 function handleCheckoutRedirect() {
     const token = getToken();
     if (!token) {
@@ -26,7 +22,7 @@ function handleCheckoutRedirect() {
         window.location.href = 'login.html';
         return;
     }
-    // Si la validación básica es exitosa
+    
     window.location.href = 'despacho.html';
 }
 
@@ -37,7 +33,7 @@ async function cargarCarrito() {
     const emptyMessageElement = document.getElementById('empty-cart-message');
     const totalElement = document.getElementById('cart-total');
     
-    // Manejo de estado no autenticado
+    
     if (!token) {
         cartItemsElement.innerHTML = '';
         emptyMessageElement.style.display = 'block';
@@ -46,14 +42,14 @@ async function cargarCarrito() {
         return;
     }
     
-    cartItemsElement.innerHTML = ''; // Limpiar lista de carga
+    cartItemsElement.innerHTML = ''; 
 
     try {
         const response = await fetch('/api/carrito', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         
-        // 1. Verificar la respuesta del Backend
+        
         if (!response.ok) {
             if (response.status === 401) {
                 alert('Sesión expirada. Por favor, inicia sesión de nuevo.');
@@ -66,11 +62,11 @@ async function cargarCarrito() {
         
         const data = await response.json();
         
-        // CRÍTICO: El backend debe devolver un objeto { items: [], total: X }
+        
         const items = data.items || [];
         const total = data.total || 0; 
         
-        // 2. Determinar si el carrito está vacío
+        
         if (items.length === 0) {
             emptyMessageElement.style.display = 'block';
             document.querySelector('.cart-actions').style.display = 'none';
@@ -78,12 +74,12 @@ async function cargarCarrito() {
             emptyMessageElement.style.display = 'none';
             document.querySelector('.cart-actions').style.display = 'flex';
             
-            // 3. Renderizar cada ítem del carrito
+            
             items.forEach(item => {
                 const li = document.createElement('li');
                 li.className = 'cart-item';
                 
-                // Asegurar que producto_id está poblado para acceder a imagen_url
+                
                 const product = item.producto_id || {}; 
 
                 li.innerHTML = `
@@ -104,10 +100,10 @@ async function cargarCarrito() {
             });
         }
         
-        // 4. Mostrar el total
+        
         totalElement.textContent = `$${total.toLocaleString('es-CL')} CLP`;
         
-        // 5. Asignar listeners a los botones (+, -, Eliminar)
+        
         cartItemsElement.querySelectorAll('.increase-btn').forEach(btn => btn.addEventListener('click', (e) => actualizarCantidad(e.target.dataset.id, parseInt(e.target.dataset.cantidad) + 1)));
         cartItemsElement.querySelectorAll('.decrease-btn').forEach(btn => btn.addEventListener('click', (e) => actualizarCantidad(e.target.dataset.id, parseInt(e.target.dataset.cantidad) - 1)));
         cartItemsElement.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => eliminarItem(e.target.dataset.id)));
@@ -118,8 +114,6 @@ async function cargarCarrito() {
         document.querySelector('.cart-actions').style.display = 'none';
     }
 }
-
-// ... (Las funciones actualizarCantidad y eliminarItem se mantienen igual) ...
 
 async function actualizarCantidad(itemId, nuevaCantidad) {
     const token = getToken();

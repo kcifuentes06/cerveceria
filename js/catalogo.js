@@ -16,14 +16,14 @@ function getToken() {
 async function cargarProductos() {
     const catalogoElement = document.getElementById('catalogo');
     
-    // Muestra el mensaje de carga inmediatamente
+    
     catalogoElement.innerHTML = '<li class="list-group-item text-center">Cargando productos...</li>'; 
 
-    // 1. Obtener valores de los filtros del HTML
+    
     const filtroTipo = document.getElementById('filtro-tipo').value;
     const filtroVariedad = document.getElementById('filtro-cervezas').value;
     
-    // 2. Construir la URL de la API
+    
     let url = '/api/productos?';
     
     if (filtroTipo && filtroTipo !== 'todos') {
@@ -38,24 +38,24 @@ async function cargarProductos() {
 
     try {
         const response = await fetch(url); 
-        const productos = await response.json(); // Parsea la respuesta JSON
+        const productos = await response.json();
 
-        // Asegúrate de que la respuesta sea un arreglo, incluso si está vacío
+        
         if (!Array.isArray(productos)) {
             throw new Error("Respuesta inválida de la API. Se esperaba una lista.");
         }
         
-        catalogoElement.innerHTML = ''; // Limpiar la lista de carga
+        catalogoElement.innerHTML = '';
 
         if (productos.length === 0) {
             catalogoElement.innerHTML = '<li class="list-group-item text-center">No se encontraron productos con esos filtros o no hay stock.</li>';
             return;
         }
 
-        // 3. Renderizar los productos
+        
         productos.forEach(producto => {
             const li = document.createElement('li');
-            // Asegúrate de que la clase CSS sea correcta
+            
             li.className = `list-group-item d-flex justify-content-between align-items-center producto ${producto.tipo} ${producto.variedad}`;
             
             const imageUrl = producto.imagen_url || 'img/placeholder.webp'; 
@@ -94,7 +94,6 @@ async function cargarProductos() {
     }
 }
 
-// ... (La función agregarAlCarrito se mantiene igual)
 async function agregarAlCarrito(producto_id, nombre_producto, precio) {
     const token = getToken();
     if (!token) {
