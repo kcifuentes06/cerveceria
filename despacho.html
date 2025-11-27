@@ -143,6 +143,7 @@
   <div id="detalle-direccion-actual" style="display: none;">
     <h3>Detalles de la dirección <span id="detalle-etiqueta"></span></h3>
     <div class="detalle-campos">
+      <p><strong>Nombre:</strong> <span id="detalle-nombre"></span></p>
       <p><strong>RUT:</strong> <span id="detalle-rut"></span></p>
       <p><strong>Dirección:</strong> <span id="detalle-direccion"></span></p>
       <p><strong>Número:</strong> <span id="detalle-numero"></span></p>
@@ -165,6 +166,9 @@
 
   <label for="etiqueta">Etiqueta (Ej: Casa, Trabajo):</label>
   <input type="text" id="etiqueta" name="etiqueta" required>
+
+  <label for="nombre_receptor">Nombre del Receptor:</label>
+  <input type="text" id="nombre_receptor" name="nombre_receptor" required>
 
   <label for="rut">RUT:</label>
   <input type="text" id="rut" name="rut" required>
@@ -189,7 +193,7 @@
 
 <section class="despacho-container text-center my-4">
     <h2>Resumen y Pago</h2>
-    <p class="h4">Total a pagar: <span id="total-a-pagar">$XX.XXX CLP</span></p> 
+    <p class="h4">Total a pagar: <span id="total-a-pagar">total-a-pagar</span></p> 
     <button id="confirmar-checkout-btn" class="btn-checkout w-100">CONFIRMAR PEDIDO Y CONTINUAR AL PAGO</button>
 </section>
 
